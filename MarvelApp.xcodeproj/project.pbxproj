@@ -25,6 +25,7 @@
 		FAB75E1E270F080D0050C40E /* Marvel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E1D270F080D0050C40E /* Marvel.swift */; };
 		FAB75E21270F0A5E0050C40E /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E20270F0A5E0050C40E /* String+MD5.swift */; };
 		FAB75E26270F11840050C40E /* CodableResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E25270F11840050C40E /* CodableResponses.swift */; };
+		FAB75E28270FA1AF0050C40E /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E27270FA1AF0050C40E /* String+HTMLAttributedString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		FAB75E20270F0A5E0050C40E /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		FAB75E22270F0B740050C40E /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		FAB75E25270F11840050C40E /* CodableResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableResponses.swift; sourceTree = "<group>"; };
+		FAB75E27270FA1AF0050C40E /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB75E20270F0A5E0050C40E /* String+MD5.swift */,
+				FAB75E27270FA1AF0050C40E /* String+HTMLAttributedString.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				FAB75E1B270F03990050C40E /* Comic.swift in Sources */,
 				FAB75E21270F0A5E0050C40E /* String+MD5.swift in Sources */,
 				FAB75DE0270EEF740050C40E /* AppDelegate.swift in Sources */,
+				FAB75E28270FA1AF0050C40E /* String+HTMLAttributedString.swift in Sources */,
 				FAB75E15270EF5D80050C40E /* ComicsViewController.swift in Sources */,
 				FAB75DE2270EEF740050C40E /* SceneDelegate.swift in Sources */,
 				FAB75E18270EF9C40050C40E /* ComicCell.swift in Sources */,

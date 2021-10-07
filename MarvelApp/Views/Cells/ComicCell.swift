@@ -17,7 +17,9 @@ class ComicCell: UITableViewCell {
 
   public func configureWith(_ comic: Comic) {
     titleLabel.text = comic.title
-    descriptionLabel.text = comic.description ?? "No description available"
+
+    descriptionLabel.attributedText = comic.description?.htmlAttributedString(size: 17) ?? NSAttributedString(string: "No description available")
+    descriptionLabel.textColor = .darkGray
 
     imageThumb.kf.setImage(with: comic.thumbnail.url, options: [.transition(.fade(0.3))])
   }
