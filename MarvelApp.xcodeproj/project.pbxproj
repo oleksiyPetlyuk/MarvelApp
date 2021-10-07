@@ -19,6 +19,7 @@
 		FAB75DF7270EEF770050C40E /* MarvelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75DF6270EEF770050C40E /* MarvelAppTests.swift */; };
 		FAB75E01270EEF770050C40E /* MarvelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E00270EEF770050C40E /* MarvelAppUITests.swift */; };
 		FAB75E03270EEF770050C40E /* MarvelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E02270EEF770050C40E /* MarvelAppUITestsLaunchTests.swift */; };
+		FAB75E10270EF11A0050C40E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = FAB75E0F270EF11A0050C40E /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		FAB75DFC270EEF770050C40E /* MarvelAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB75E00270EEF770050C40E /* MarvelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAppUITests.swift; sourceTree = "<group>"; };
 		FAB75E02270EEF770050C40E /* MarvelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FAB75E0F270EF11A0050C40E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +103,6 @@
 				6AB7BA5D3B0B99760E011F81 /* Pods-MarvelAppTests.debug.xcconfig */,
 				B474662B577F259623FC296C /* Pods-MarvelAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -118,6 +119,7 @@
 		FAB75DD3270EEF740050C40E = {
 			isa = PBXGroup;
 			children = (
+				FAB75E0F270EF11A0050C40E /* .swiftlint.yml */,
 				FAB75DDE270EEF740050C40E /* MarvelApp */,
 				FAB75DF5270EEF770050C40E /* MarvelAppTests */,
 				FAB75DFF270EEF770050C40E /* MarvelAppUITests */,
@@ -179,6 +181,7 @@
 				FAB75DD8270EEF740050C40E /* Sources */,
 				FAB75DD9270EEF740050C40E /* Frameworks */,
 				FAB75DDA270EEF740050C40E /* Resources */,
+				FAB75E11270EF13B0050C40E /* ShellScript */,
 				41E152E36B2CD0B6C5B60AC4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -277,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB75E10270EF11A0050C40E /* .swiftlint.yml in Resources */,
 				FAB75DEC270EEF770050C40E /* LaunchScreen.storyboard in Resources */,
 				FAB75DE9270EEF770050C40E /* Assets.xcassets in Resources */,
 				FAB75DE7270EEF740050C40E /* Main.storyboard in Resources */,
@@ -399,6 +403,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		FAB75E11270EF13B0050C40E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
