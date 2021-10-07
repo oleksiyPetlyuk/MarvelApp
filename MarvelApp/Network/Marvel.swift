@@ -12,7 +12,8 @@ enum Marvel {
   static private let privateKey = "ef62a4c37fea721b01b122a97317cbdf56051f43"
   static private let publicKey = "18637a6c8df47e6993e5aece795a7ef5"
 
-  case comics
+  case newlyReleasedComics
+  case findComics(title: String)
 }
 
 extension Marvel: TargetType {
@@ -22,13 +23,13 @@ extension Marvel: TargetType {
 
   var path: String {
     switch self {
-    case .comics: return "/comics"
+    case .newlyReleasedComics, .findComics: return "/comics"
     }
   }
 
   var method: Moya.Method {
     switch self {
-    case .comics: return .get
+    case .newlyReleasedComics, .findComics: return .get
     }
   }
 
@@ -40,17 +41,26 @@ extension Marvel: TargetType {
     let timestamp = "\(Date().timeIntervalSince1970)"
     let hash = (timestamp + Marvel.privateKey + Marvel.publicKey).md5
     let authParams = ["apikey": Marvel.publicKey, "ts": timestamp, "hash": hash]
+    let defaultParams: [String: Any] = [
+      "format": "comic",
+      "formatType": "comic",
+      "orderBy": "-onsaleDate",
+      "noVariants": true,
+      "limit": 100
+    ]
 
     switch self {
-    case .comics:
-      var params: [String: Any] = [
-        "format": "comic",
-        "formatType": "comic",
-        "orderBy": "-onsaleDate",
-        "dateDescriptor": "lastWeek",
-        "limit": 50
-      ]
+    case .newlyReleasedComics:
+      var params: [String: Any] = ["dateDescriptor": "thisMonth"]
 
+      params.merge(defaultParams) { (_, new) in new }
+      params.merge(authParams) { (_, new) in new }
+
+      return .requestParameters(parameters: params, encoding: URLEncoding.default)
+    case let .findComics(title):
+      var params: [String: Any] = ["titleStartsWith": title]
+
+      params.merge(defaultParams) { (_, new) in new }
       params.merge(authParams) { (_, new) in new }
 
       return .requestParameters(parameters: params, encoding: URLEncoding.default)

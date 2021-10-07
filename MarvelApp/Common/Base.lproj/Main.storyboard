@@ -132,6 +132,25 @@
                                     <constraint firstAttribute="width" constant="50" id="nPr-CQ-edL"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVX-0i-R1G" userLabel="Message View">
+                                <rect key="frame" x="70" y="286" width="250" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing was found 😩" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnN-6k-IEY" userLabel="Message Label">
+                                        <rect key="frame" x="16" y="62.000000000000007" width="218" height="26.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="pnN-6k-IEY" firstAttribute="centerY" secondItem="PVX-0i-R1G" secondAttribute="centerY" id="RA8-2X-9E8"/>
+                                    <constraint firstAttribute="width" constant="250" id="TXP-z2-yXG"/>
+                                    <constraint firstItem="pnN-6k-IEY" firstAttribute="leading" secondItem="PVX-0i-R1G" secondAttribute="leading" constant="16" id="Trq-U4-COg"/>
+                                    <constraint firstAttribute="height" constant="150" id="cwG-T3-xGp"/>
+                                    <constraint firstAttribute="trailing" secondItem="pnN-6k-IEY" secondAttribute="trailing" constant="16" id="piN-oa-udj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b8I-bK-cKV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -139,7 +158,9 @@
                             <constraint firstItem="b8I-bK-cKV" firstAttribute="trailing" secondItem="3m5-cX-9sz" secondAttribute="trailing" id="1uj-r2-zcy"/>
                             <constraint firstItem="6yH-xH-DZn" firstAttribute="centerX" secondItem="b8I-bK-cKV" secondAttribute="centerX" id="4R1-zI-cgn"/>
                             <constraint firstItem="3m5-cX-9sz" firstAttribute="top" secondItem="b8I-bK-cKV" secondAttribute="top" id="NrD-e1-BjN"/>
+                            <constraint firstItem="PVX-0i-R1G" firstAttribute="centerX" secondItem="b8I-bK-cKV" secondAttribute="centerX" id="RI7-cu-LEd"/>
                             <constraint firstItem="6yH-xH-DZn" firstAttribute="centerY" secondItem="b8I-bK-cKV" secondAttribute="centerY" id="a2J-5G-8LY"/>
+                            <constraint firstItem="PVX-0i-R1G" firstAttribute="centerY" secondItem="b8I-bK-cKV" secondAttribute="centerY" id="nTk-k8-LAi"/>
                             <constraint firstItem="b8I-bK-cKV" firstAttribute="bottom" secondItem="3m5-cX-9sz" secondAttribute="bottom" id="oWI-gU-1PY"/>
                             <constraint firstItem="3m5-cX-9sz" firstAttribute="leading" secondItem="b8I-bK-cKV" secondAttribute="leading" id="w5T-nn-Ziy"/>
                         </constraints>
@@ -148,6 +169,8 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="6yH-xH-DZn" id="62G-9w-uyI"/>
                         <outlet property="comicsTable" destination="3m5-cX-9sz" id="bdN-nh-dTr"/>
+                        <outlet property="messageLabel" destination="pnN-6k-IEY" id="z3k-Z5-J5y"/>
+                        <outlet property="messageView" destination="PVX-0i-R1G" id="ceB-kq-jw1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gJ-zJ-6CX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

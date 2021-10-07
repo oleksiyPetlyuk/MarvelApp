@@ -16,16 +16,27 @@ class ComicsViewController: UIViewController {
   private var state: State = .loading {
     didSet {
       switch state {
-      case .ready:
+      case .ready(let items):
         activityIndicatorView.isHidden = true
-        comicsTable.isHidden = false
-        comicsTable.reloadData()
+
+        if items.isEmpty {
+          comicsTable.isHidden = true
+          messageView.isHidden = false
+          messageLabel.text = "Nothing was found 😩"
+        } else {
+          messageView.isHidden = true
+          comicsTable.isHidden = false
+          comicsTable.reloadData()
+        }
       case .loading:
         activityIndicatorView.isHidden = false
         comicsTable.isHidden = true
+        messageView.isHidden = true
       case .error:
         activityIndicatorView.isHidden = true
         comicsTable.isHidden = true
+        messageView.isHidden = false
+        messageLabel.text = "Oops! Something went wrong 😩"
       }
     }
   }
@@ -33,29 +44,63 @@ class ComicsViewController: UIViewController {
   // MARK: - Outlets
   @IBOutlet weak private var comicsTable: UITableView!
   @IBOutlet weak private var activityIndicatorView: UIView!
+  @IBOutlet weak private var messageView: UIView!
+  @IBOutlet weak private var messageLabel: UILabel!
+
+  let searchController = UISearchController(searchResultsController: nil)
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     state = .loading
 
-    getData()
+    setupSearchController()
+
+    getNewlyReleasedComics()
   }
 
-  private func getData() {
-    provider.request(.comics) { [weak self] result in
+  private func setupSearchController() {
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = "Search Comics"
+    searchController.searchBar.searchTextField.backgroundColor = .white
+    searchController.searchBar.tintColor = .white
+    searchController.searchBar.delegate = self
+
+    navigationItem.searchController = searchController
+    navigationItem.hidesSearchBarWhenScrolling = false
+    definesPresentationContext = true
+  }
+
+  private func getNewlyReleasedComics() {
+    state = .loading
+
+    provider.request(.newlyReleasedComics) { [weak self] result in
       guard let self = self else { return }
 
-      switch result {
-      case .success(let response):
-        do {
-          self.state = .ready(try response.map(MarvelResponse<Comic>.self).data.results)
-        } catch {
-          self.state = .error
-        }
-      case .failure:
+      self.handle(result: result)
+    }
+  }
+
+  private func getComicsWith(title: String) {
+    state = .loading
+
+    provider.request(.findComics(title: title)) { [weak self] result in
+      guard let self = self else { return }
+
+      self.handle(result: result)
+    }
+  }
+
+  private func handle(result: Result<Response, MoyaError>) {
+    switch result {
+    case .success(let response):
+      do {
+        self.state = .ready(try response.map(MarvelResponse<Comic>.self).data.results)
+      } catch {
         self.state = .error
       }
+    case .failure:
+      self.state = .error
     }
   }
 }
@@ -94,5 +139,21 @@ extension ComicsViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: false)
+  }
+}
+
+// MARK: - UISearchBar Delegate
+extension ComicsViewController: UISearchBarDelegate {
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    guard let text = searchBar.text else { return }
+
+    let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    print("Entered: \(searchText)")
+
+    getComicsWith(title: searchText)
+  }
+
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    getNewlyReleasedComics()
   }
 }
