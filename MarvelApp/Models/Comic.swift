@@ -22,6 +22,7 @@ extension Comic {
     let `extension`: String
 
     var url: URL {
+      // swiftlint:disable:next force_unwrapping
       return URL(string: path + "." + `extension`)!
     }
   }

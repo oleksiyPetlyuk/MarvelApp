@@ -246,10 +246,10 @@
 			buildConfigurationList = FAB75E06270EEF770050C40E /* Build configuration list for PBXNativeTarget "MarvelApp" */;
 			buildPhases = (
 				B6EDF72E26151BA88046A741 /* [CP] Check Pods Manifest.lock */,
+				FAB75E11270EF13B0050C40E /* ShellScript */,
 				FAB75DD8270EEF740050C40E /* Sources */,
 				FAB75DD9270EEF740050C40E /* Frameworks */,
 				FAB75DDA270EEF740050C40E /* Resources */,
-				FAB75E11270EF13B0050C40E /* ShellScript */,
 				41E152E36B2CD0B6C5B60AC4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (

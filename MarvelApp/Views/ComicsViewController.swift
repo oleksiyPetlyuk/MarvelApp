@@ -9,7 +9,6 @@ import UIKit
 import Moya
 
 class ComicsViewController: UIViewController {
-
   let provider = MoyaProvider<Marvel>()
 
   // MARK: - View State

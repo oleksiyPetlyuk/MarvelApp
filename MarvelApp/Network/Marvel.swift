@@ -18,6 +18,7 @@ enum Marvel {
 
 extension Marvel: TargetType {
   var baseURL: URL {
+    // swiftlint:disable:next force_unwrapping
     return URL(string: "https://gateway.marvel.com/v1/public")!
   }
 
@@ -53,15 +54,15 @@ extension Marvel: TargetType {
     case .newlyReleasedComics:
       var params: [String: Any] = ["dateDescriptor": "thisMonth"]
 
-      params.merge(defaultParams) { (_, new) in new }
-      params.merge(authParams) { (_, new) in new }
+      params.merge(defaultParams) { _, new in new }
+      params.merge(authParams) { _, new in new }
 
       return .requestParameters(parameters: params, encoding: URLEncoding.default)
     case let .findComics(title):
       var params: [String: Any] = ["titleStartsWith": title]
 
-      params.merge(defaultParams) { (_, new) in new }
-      params.merge(authParams) { (_, new) in new }
+      params.merge(defaultParams) { _, new in new }
+      params.merge(authParams) { _, new in new }
 
       return .requestParameters(parameters: params, encoding: URLEncoding.default)
     }

@@ -11,6 +11,7 @@ import UIKit
 
 extension String {
   func htmlAttributedString(size: CGFloat) -> NSAttributedString? {
+    // swiftlint:disable indentation_width
     let htmlTemplate = """
         <!doctype html>
         <html>
@@ -27,6 +28,7 @@ extension String {
           </body>
         </html>
         """
+    // swiftlint:enable indentation_width
 
     guard let data = htmlTemplate.data(using: .utf8) else {
       return nil
