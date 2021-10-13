@@ -139,6 +139,12 @@ extension ComicsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: false)
   }
+
+  func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    guard let cell = cell as? ComicCell else { return }
+
+    cell.cancelImageDownloadTask()
+  }
 }
 
 // MARK: - UISearchBar Delegate
@@ -147,7 +153,6 @@ extension ComicsViewController: UISearchBarDelegate {
     guard let text = searchBar.text else { return }
 
     let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-    print("Entered: \(searchText)")
 
     getComicsWith(title: searchText)
   }
