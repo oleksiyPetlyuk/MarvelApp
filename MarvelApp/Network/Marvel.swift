@@ -14,6 +14,7 @@ enum Marvel {
 
   case newlyReleasedComics
   case findComics(title: String)
+  case getCharacters(comic: Comic)
 }
 
 extension Marvel: TargetType {
@@ -24,13 +25,16 @@ extension Marvel: TargetType {
 
   var path: String {
     switch self {
-    case .newlyReleasedComics, .findComics: return "/comics"
+    case .newlyReleasedComics, .findComics:
+      return "/comics"
+    case .getCharacters(let comic):
+      return "/comics/\(comic.id)/characters"
     }
   }
 
   var method: Moya.Method {
     switch self {
-    case .newlyReleasedComics, .findComics: return .get
+    case .newlyReleasedComics, .findComics, .getCharacters: return .get
     }
   }
 
@@ -65,6 +69,8 @@ extension Marvel: TargetType {
       params.merge(authParams) { _, new in new }
 
       return .requestParameters(parameters: params, encoding: URLEncoding.default)
+    case .getCharacters:
+      return .requestParameters(parameters: authParams, encoding: URLEncoding.default)
     }
   }
 

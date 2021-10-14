@@ -104,6 +104,7 @@ class ComicsViewController: UIViewController {
   }
 }
 
+// MARK: - Helpers
 extension ComicsViewController {
   enum State {
     case loading
@@ -121,7 +122,7 @@ extension ComicsViewController: UITableViewDelegate, UITableViewDataSource {
 
     guard case .ready(let items) = state else { return cell }
 
-    cell.configureWith(items[indexPath.item])
+    cell.configureWith(items[indexPath.row])
 
     return cell
   }
@@ -138,6 +139,12 @@ extension ComicsViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: false)
+
+    guard case .ready(let items) = state else { return }
+
+    let comicVC = ComicViewController.instantiate(with: items[indexPath.row])
+
+    navigationController?.pushViewController(comicVC, animated: true)
   }
 
   func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

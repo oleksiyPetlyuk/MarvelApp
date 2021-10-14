@@ -17,18 +17,6 @@ struct Comic: Codable {
 }
 
 extension Comic {
-  struct Thumbnail: Codable {
-    let path: String
-    let `extension`: String
-
-    var url: URL {
-      // swiftlint:disable:next force_unwrapping
-      return URL(string: path + "." + `extension`)!
-    }
-  }
-}
-
-extension Comic {
   struct Date: Codable {
     let type: String
     let date: String

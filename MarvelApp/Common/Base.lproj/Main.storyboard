@@ -16,6 +16,7 @@
                         <rect key="frame" x="0.0" y="44" width="390" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" systemColor="systemRedColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -171,11 +172,28 @@
                         <outlet property="comicsTable" destination="3m5-cX-9sz" id="bdN-nh-dTr"/>
                         <outlet property="messageLabel" destination="pnN-6k-IEY" id="z3k-Z5-J5y"/>
                         <outlet property="messageView" destination="PVX-0i-R1G" id="ceB-kq-jw1"/>
+                        <segue destination="GTT-sH-o8m" kind="show" identifier="ViewComicSegue" id="XYI-Pg-CA7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gJ-zJ-6CX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-772.30769230769226" y="-33.412322274881518"/>
+            <point key="canvasLocation" x="-920" y="-33"/>
+        </scene>
+        <!--Comic View Controller-->
+        <scene sceneID="XHx-my-g4M">
+            <objects>
+                <viewController storyboardIdentifier="ComicViewController" id="GTT-sH-o8m" customClass="ComicViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KAA-Hs-mLw">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="704"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="D7I-kK-mJl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5JI-RD-R9X"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tmy-OR-xzR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-122" y="-33"/>
         </scene>
     </scenes>
     <resources>

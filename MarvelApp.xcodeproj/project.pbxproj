@@ -25,6 +25,12 @@
 		FAB75E28270FA1AF0050C40E /* String+HTMLAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E27270FA1AF0050C40E /* String+HTMLAttributedString.swift */; };
 		FAB75E352715EAE60050C40E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FAB75E342715EAE60050C40E /* Kingfisher */; };
 		FAB75E3A2715EF0A0050C40E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FAB75E392715EF0A0050C40E /* Moya */; };
+		FAB75E3C2716FA930050C40E /* ComicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E3B2716FA930050C40E /* ComicViewController.swift */; };
+		FAB75E40271706070050C40E /* ComicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E3F271706070050C40E /* ComicHeaderView.swift */; };
+		FAB75E4227171C520050C40E /* StretchyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E4127171C520050C40E /* StretchyHeaderLayout.swift */; };
+		FAB75E4427183F840050C40E /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E4327183F840050C40E /* CharacterCell.swift */; };
+		FAB75E4627186AD70050C40E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E4527186AD70050C40E /* Character.swift */; };
+		FAB75E4827186B510050C40E /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75E4727186B510050C40E /* Thumbnail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +72,12 @@
 		FAB75E22270F0B740050C40E /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		FAB75E25270F11840050C40E /* CodableResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableResponses.swift; sourceTree = "<group>"; };
 		FAB75E27270FA1AF0050C40E /* String+HTMLAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLAttributedString.swift"; sourceTree = "<group>"; };
+		FAB75E3B2716FA930050C40E /* ComicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicViewController.swift; sourceTree = "<group>"; };
+		FAB75E3F271706070050C40E /* ComicHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicHeaderView.swift; sourceTree = "<group>"; };
+		FAB75E4127171C520050C40E /* StretchyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderLayout.swift; sourceTree = "<group>"; };
+		FAB75E4327183F840050C40E /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
+		FAB75E4527186AD70050C40E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		FAB75E4727186B510050C40E /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +177,8 @@
 			children = (
 				FAB75E16270EF99B0050C40E /* Cells */,
 				FAB75E14270EF5D80050C40E /* ComicsViewController.swift */,
+				FAB75E3B2716FA930050C40E /* ComicViewController.swift */,
+				FAB75E4127171C520050C40E /* StretchyHeaderLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,7 +186,9 @@
 		FAB75E16270EF99B0050C40E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				FAB75E3F271706070050C40E /* ComicHeaderView.swift */,
 				FAB75E17270EF9C40050C40E /* ComicCell.swift */,
+				FAB75E4327183F840050C40E /* CharacterCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -180,7 +196,9 @@
 		FAB75E19270F03800050C40E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FAB75E4727186B510050C40E /* Thumbnail.swift */,
 				FAB75E1A270F03990050C40E /* Comic.swift */,
+				FAB75E4527186AD70050C40E /* Character.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,8 +235,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAB75E06270EEF770050C40E /* Build configuration list for PBXNativeTarget "MarvelApp" */;
 			buildPhases = (
-				FAB75E362715EC420050C40E /* Run Script */,
 				FAB75DD8270EEF740050C40E /* Sources */,
+				FAB75E362715EC420050C40E /* Run Script */,
 				FAB75DD9270EEF740050C40E /* Frameworks */,
 				FAB75DDA270EEF740050C40E /* Resources */,
 			);
@@ -374,10 +392,16 @@
 			files = (
 				FAB75E1E270F080D0050C40E /* Marvel.swift in Sources */,
 				FAB75E1B270F03990050C40E /* Comic.swift in Sources */,
+				FAB75E3C2716FA930050C40E /* ComicViewController.swift in Sources */,
 				FAB75E21270F0A5E0050C40E /* String+MD5.swift in Sources */,
 				FAB75DE0270EEF740050C40E /* AppDelegate.swift in Sources */,
 				FAB75E28270FA1AF0050C40E /* String+HTMLAttributedString.swift in Sources */,
+				FAB75E4227171C520050C40E /* StretchyHeaderLayout.swift in Sources */,
 				FAB75E15270EF5D80050C40E /* ComicsViewController.swift in Sources */,
+				FAB75E4827186B510050C40E /* Thumbnail.swift in Sources */,
+				FAB75E4427183F840050C40E /* CharacterCell.swift in Sources */,
+				FAB75E4627186AD70050C40E /* Character.swift in Sources */,
+				FAB75E40271706070050C40E /* ComicHeaderView.swift in Sources */,
 				FAB75DE2270EEF740050C40E /* SceneDelegate.swift in Sources */,
 				FAB75E18270EF9C40050C40E /* ComicCell.swift in Sources */,
 				FAB75E26270F11840050C40E /* CodableResponses.swift in Sources */,
@@ -560,6 +584,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W6MAKY98QY;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MarvelApp/Common/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -576,6 +601,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = MarvelApp/Common/Bridging.h;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -589,6 +615,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W6MAKY98QY;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MarvelApp/Common/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -605,6 +632,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = MarvelApp/Common/Bridging.h;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
