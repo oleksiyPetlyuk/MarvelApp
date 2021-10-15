@@ -15,6 +15,7 @@ class ComicHeaderView: UICollectionReusableView {
     let imageView = UIImageView()
     imageView.clipsToBounds = true
     imageView.contentMode = .scaleAspectFill
+    imageView.translatesAutoresizingMaskIntoConstraints = false
 
     return imageView
   }()
@@ -23,8 +24,6 @@ class ComicHeaderView: UICollectionReusableView {
     super.init(frame: frame)
 
     addSubview(imageView)
-
-    imageView.translatesAutoresizingMaskIntoConstraints = false
 
     imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

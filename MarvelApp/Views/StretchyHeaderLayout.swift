@@ -19,10 +19,6 @@ class StretchyHeaderLayout: UICollectionViewFlowLayout {
 
         let contentOffsetY = collectionView.contentOffset.y
 
-        if contentOffsetY > 0 {
-          return
-        }
-
         let width = collectionView.frame.width
         let height = attributes.frame.height - contentOffsetY
 

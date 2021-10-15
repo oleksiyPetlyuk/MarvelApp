@@ -12,7 +12,7 @@
         <scene sceneID="SIX-V4-wFm">
             <objects>
                 <navigationController id="R44-Zg-Vyu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="nAZ-ZA-oTc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="nAZ-ZA-oTc">
                         <rect key="frame" x="0.0" y="44" width="390" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemRedColor"/>
@@ -56,11 +56,11 @@
             <objects>
                 <viewController id="wgu-E0-JgA" userLabel="Comics" customClass="ComicsViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oPI-e5-Bcj">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="756"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3m5-cX-9sz" userLabel="Comics Table">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="722"/>
+                                <rect key="frame" x="0.0" y="140" width="390" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ComicCell" rowHeight="128" id="u1H-uG-Qn4" userLabel="Comic Cell" customClass="ComicCell" customModule="MarvelApp" customModuleProvider="target">
@@ -118,7 +118,7 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yH-xH-DZn" userLabel="Activity Indicator View">
-                                <rect key="frame" x="170" y="336" width="50" height="50"/>
+                                <rect key="frame" x="170" y="450" width="50" height="50"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ifT-PN-tt6">
                                         <rect key="frame" x="6.6666666666666572" y="6.6666666666666856" width="37" height="37"/>
@@ -134,7 +134,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVX-0i-R1G" userLabel="Message View">
-                                <rect key="frame" x="70" y="286" width="250" height="150"/>
+                                <rect key="frame" x="70" y="400" width="250" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing was found 😩" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnN-6k-IEY" userLabel="Message Label">
                                         <rect key="frame" x="16" y="62.000000000000007" width="218" height="26.333333333333336"/>
@@ -184,7 +184,7 @@
             <objects>
                 <viewController storyboardIdentifier="ComicViewController" id="GTT-sH-o8m" customClass="ComicViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KAA-Hs-mLw">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="704"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="D7I-kK-mJl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
