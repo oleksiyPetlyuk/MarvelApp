@@ -16,12 +16,22 @@ class ComicViewController: UIViewController {
     didSet {
       switch state {
       case .ready(let items):
-        print(items.count)
-        collectionView.reloadData()
+        activityIndicator.stopAnimating()
+
+        if items.isEmpty {
+          messageLabel.text = "No characters were found 🤷‍♂️"
+          messageLabel.isHidden = false
+        } else {
+          messageLabel.isHidden = true
+          collectionView.reloadData()
+        }
       case .loading:
-        print("loading")
+        messageLabel.isHidden = true
+        activityIndicator.startAnimating()
       case .error:
-        print("Error")
+        activityIndicator.stopAnimating()
+        messageLabel.text = "Oops! Something went wrong 😩"
+        messageLabel.isHidden = false
       }
     }
   }
@@ -46,6 +56,27 @@ class ComicViewController: UIViewController {
     return collectionView
   }()
 
+  private let activityIndicator: UIActivityIndicatorView = {
+    let activityIndicator = UIActivityIndicatorView(style: .large)
+    activityIndicator.color = .systemRed
+
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+    return activityIndicator
+  }()
+
+  private let messageLabel: UILabel = {
+    let label = UILabel()
+
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.font = .systemFont(ofSize: 22)
+    label.textAlignment = .center
+    label.numberOfLines = 0
+
+
+    return label
+  }()
+
   private var comic: Comic?
 
   override func viewDidLoad() {
@@ -59,6 +90,8 @@ class ComicViewController: UIViewController {
     state = .loading
 
     setupCollectionView()
+    setupActivityIndicator()
+    setupMessageLabel()
 
     getCharacters(of: comic)
   }
@@ -73,6 +106,24 @@ class ComicViewController: UIViewController {
     collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+  }
+
+  private func setupActivityIndicator() {
+    view.addSubview(activityIndicator)
+
+    let centerY = ComicViewController.sectionHeaderHeight / 2
+
+    activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor, constant: centerY).isActive = true
+  }
+
+  private func setupMessageLabel() {
+    view.addSubview(messageLabel)
+
+    let centerY = ComicViewController.sectionHeaderHeight / 2
+
+    messageLabel.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
+    messageLabel.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor, constant: centerY).isActive = true
   }
 
   private func getCharacters(of comic: Comic) {
@@ -97,8 +148,10 @@ class ComicViewController: UIViewController {
 
 // MARK: - FlowLayout Delegate
 extension ComicViewController: UICollectionViewDelegateFlowLayout {
+  private static let sectionHeaderHeight: CGFloat = 340.0
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    return .init(width: view.frame.width, height: 340)
+    return .init(width: view.frame.width, height: ComicViewController.sectionHeaderHeight)
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
