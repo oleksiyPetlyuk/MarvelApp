@@ -7,6 +7,7 @@
 
 import UIKit
 import Moya
+import SnapKit
 
 class ComicViewController: UIViewController {
   let provider = MoyaProvider<Marvel>()
@@ -44,8 +45,6 @@ class ComicViewController: UIViewController {
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-
     collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifier)
     collectionView.register(
       ComicHeaderView.self,
@@ -60,19 +59,15 @@ class ComicViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .large)
     activityIndicator.color = .systemRed
 
-    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-
     return activityIndicator
   }()
 
   private let messageLabel: UILabel = {
     let label = UILabel()
 
-    label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 22)
     label.textAlignment = .center
     label.numberOfLines = 0
-
 
     return label
   }()
@@ -102,10 +97,9 @@ class ComicViewController: UIViewController {
     collectionView.dataSource = self
     collectionView.delegate = self
 
-    collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-    collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-    collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+    collectionView.snp.makeConstraints { make in
+      make.edges.equalTo(view.safeAreaLayoutGuide)
+    }
   }
 
   private func setupActivityIndicator() {
@@ -113,8 +107,10 @@ class ComicViewController: UIViewController {
 
     let centerY = ComicViewController.sectionHeaderHeight / 2
 
-    activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
-    activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor, constant: centerY).isActive = true
+    activityIndicator.snp.makeConstraints { make in
+      make.centerX.equalTo(collectionView)
+      make.centerY.equalTo(collectionView).offset(centerY)
+    }
   }
 
   private func setupMessageLabel() {
@@ -122,8 +118,10 @@ class ComicViewController: UIViewController {
 
     let centerY = ComicViewController.sectionHeaderHeight / 2
 
-    messageLabel.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
-    messageLabel.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor, constant: centerY).isActive = true
+    messageLabel.snp.makeConstraints { make in
+      make.centerX.equalTo(collectionView)
+      make.centerY.equalTo(collectionView).offset(centerY)
+    }
   }
 
   private func getCharacters(of comic: Comic) {

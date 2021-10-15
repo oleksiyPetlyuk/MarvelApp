@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class ComicHeaderView: UICollectionReusableView {
   static let reuseIdentifier = "ComicHeaderView"
@@ -15,7 +16,6 @@ class ComicHeaderView: UICollectionReusableView {
     let imageView = UIImageView()
     imageView.clipsToBounds = true
     imageView.contentMode = .scaleAspectFill
-    imageView.translatesAutoresizingMaskIntoConstraints = false
 
     return imageView
   }()
@@ -25,10 +25,9 @@ class ComicHeaderView: UICollectionReusableView {
 
     addSubview(imageView)
 
-    imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    imageView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
 
   required init?(coder: NSCoder) {

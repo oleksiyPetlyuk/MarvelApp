@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class CharacterCell: UICollectionViewCell {
   static let reuseIdentifier = "CharacterCell"
@@ -15,7 +16,6 @@ class CharacterCell: UICollectionViewCell {
     let imageView = UIImageView()
 
     imageView.clipsToBounds = true
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.contentMode = .scaleToFill
 
     return imageView
@@ -27,7 +27,6 @@ class CharacterCell: UICollectionViewCell {
     label.font = .systemFont(ofSize: 22, weight: .semibold)
     label.textAlignment = .natural
     label.numberOfLines = 1
-    label.translatesAutoresizingMaskIntoConstraints = false
 
     return label
   }()
@@ -39,12 +38,9 @@ class CharacterCell: UICollectionViewCell {
     label.textColor = .darkGray
     label.textAlignment = .natural
     label.numberOfLines = 0
-    label.translatesAutoresizingMaskIntoConstraints = false
 
     return label
   }()
-
-  private var layoutConstraints: [NSLayoutConstraint] = []
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -61,25 +57,25 @@ class CharacterCell: UICollectionViewCell {
   }
 
   private func setupLayoutConstraints() {
-    layoutConstraints = [
-      contentView.bottomAnchor.constraint(equalTo: imageThumb.bottomAnchor, constant: 8),
-      contentView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 16),
-      contentView.bottomAnchor.constraint(greaterThanOrEqualTo: descriptionLabel.bottomAnchor, constant: 8),
+    imageThumb.snp.makeConstraints { make in
+      make.bottom.equalToSuperview().offset(-8)
+      make.leading.equalToSuperview().offset(16)
+      make.top.equalToSuperview().offset(8)
+      make.width.equalTo(imageThumb.snp.height).multipliedBy(3.0 / 4.0)
+    }
 
-      imageThumb.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-      imageThumb.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-      imageThumb.widthAnchor.constraint(equalTo: imageThumb.heightAnchor, multiplier: 3.0 / 4.0),
+    nameLabel.snp.makeConstraints { make in
+      make.trailing.equalToSuperview().offset(-16)
+      make.leading.equalTo(imageThumb.snp.trailing).offset(8)
+      make.height.equalTo(26)
+      make.top.equalTo(imageThumb.snp.top)
+      make.bottom.equalTo(descriptionLabel.snp.top)
+    }
 
-      nameLabel.leadingAnchor.constraint(equalTo: imageThumb.trailingAnchor, constant: 8),
-      nameLabel.heightAnchor.constraint(equalToConstant: 26),
-      nameLabel.topAnchor.constraint(equalTo: imageThumb.topAnchor),
-      nameLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 0),
-
-      descriptionLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-      descriptionLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor)
-    ]
-
-    layoutConstraints.forEach { $0.isActive = true }
+    descriptionLabel.snp.makeConstraints { make in
+      make.leading.trailing.equalTo(nameLabel)
+      make.bottom.lessThanOrEqualToSuperview().offset(-8)
+    }
   }
 
   func configureWith(_ character: Character) {
