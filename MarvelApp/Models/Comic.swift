@@ -34,3 +34,11 @@ extension Comic {
     let name: String
   }
 }
+
+// Class wrapper to use it in Objective-C
+@objc(Comic)
+class ComicObjCWrapper: NSObject, Codable {
+  @objc let id: Int
+  @objc let title: String
+  @objc let descriptionWrapper: String?
+}

@@ -9,5 +9,6 @@
 #define Bridging_h
 
 #import <CommonCrypto/CommonCrypto.h>
+#import "MLogger.h"
 
 #endif /* Bridging_h */

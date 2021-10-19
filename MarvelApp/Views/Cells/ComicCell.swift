@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 class ComicCell: UITableViewCell {
-  static let reuseIdentifier = "ComicCell"
+  @objc static let reuseIdentifier = "ComicCell"
 
   @IBOutlet weak private var imageThumb: UIImageView!
   @IBOutlet weak private var titleLabel: UILabel!
@@ -29,5 +29,17 @@ class ComicCell: UITableViewCell {
 
   func cancelImageDownloadTask() {
     imageThumb.kf.cancelDownloadTask()
+  }
+}
+
+extension ComicCell {
+  // Function wrapper to use it with Objective-C
+  @objc func configure(with comic: ComicObjCWrapper) {
+    titleLabel.text = comic.title
+
+    descriptionLabel.attributedText = comic.descriptionWrapper?.htmlAttributedString(size: 17) ?? NSAttributedString(
+      string: "No description available"
+    )
+    descriptionLabel.textColor = .darkGray
   }
 }

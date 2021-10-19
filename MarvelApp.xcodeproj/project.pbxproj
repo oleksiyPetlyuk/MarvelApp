@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FA549E342719A8AD00C85209 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FA549E332719A8AD00C85209 /* SnapKit */; };
+		FA81DB08271EC9B700EC6118 /* MLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA81DB07271EC9B700EC6118 /* MLogger.m */; };
+		FA81DB10271F032900EC6118 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81DB0F271F032900EC6118 /* SwiftExtensions.swift */; };
 		FAB75DE0270EEF740050C40E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75DDF270EEF740050C40E /* AppDelegate.swift */; };
 		FAB75DE2270EEF740050C40E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB75DE1270EEF740050C40E /* SceneDelegate.swift */; };
 		FAB75DE7270EEF740050C40E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAB75DE5270EEF740050C40E /* Main.storyboard */; };
@@ -52,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA81DB07271EC9B700EC6118 /* MLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLogger.m; sourceTree = "<group>"; };
+		FA81DB09271EC9D400EC6118 /* MLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLogger.h; sourceTree = "<group>"; };
+		FA81DB0F271F032900EC6118 /* SwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
 		FAB75DDC270EEF740050C40E /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB75DDF270EEF740050C40E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAB75DE1270EEF740050C40E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +114,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA81DB0E271F02F500EC6118 /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				FA81DB09271EC9D400EC6118 /* MLogger.h */,
+				FA81DB07271EC9B700EC6118 /* MLogger.m */,
+				FA81DB0F271F032900EC6118 /* SwiftExtensions.swift */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
 		FAB75DD3270EEF740050C40E = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +232,7 @@
 		FAB75E1F270F0A4B0050C40E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FA81DB0E271F02F500EC6118 /* ObjC */,
 				FAB75E20270F0A5E0050C40E /* String+MD5.swift */,
 				FAB75E27270FA1AF0050C40E /* String+HTMLAttributedString.swift */,
 			);
@@ -395,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB75E1E270F080D0050C40E /* Marvel.swift in Sources */,
+				FA81DB08271EC9B700EC6118 /* MLogger.m in Sources */,
 				FAB75E1B270F03990050C40E /* Comic.swift in Sources */,
 				FAB75E3C2716FA930050C40E /* ComicViewController.swift in Sources */,
 				FAB75E21270F0A5E0050C40E /* String+MD5.swift in Sources */,
@@ -407,6 +424,7 @@
 				FAB75E4627186AD70050C40E /* Character.swift in Sources */,
 				FAB75E40271706070050C40E /* ComicHeaderView.swift in Sources */,
 				FAB75DE2270EEF740050C40E /* SceneDelegate.swift in Sources */,
+				FA81DB10271F032900EC6118 /* SwiftExtensions.swift in Sources */,
 				FAB75E18270EF9C40050C40E /* ComicCell.swift in Sources */,
 				FAB75E26270F11840050C40E /* CodableResponses.swift in Sources */,
 			);
