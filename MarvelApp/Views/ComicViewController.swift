@@ -6,33 +6,36 @@
 //
 
 import UIKit
-import Moya
 import SnapKit
 
 class ComicViewController: UIViewController {
-  let provider = MoyaProvider<Marvel>()
+  var library: ComicsLibrary!
 
   // MARK: - View State
   private var state: State = .loading {
     didSet {
-      switch state {
-      case .ready(let items):
-        activityIndicator.stopAnimating()
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
 
-        if items.isEmpty {
-          messageLabel.text = "No characters were found 🤷‍♂️"
-          messageLabel.isHidden = false
-        } else {
-          messageLabel.isHidden = true
-          collectionView.reloadData()
+        switch self.state {
+        case .ready(let items):
+          self.activityIndicator.stopAnimating()
+
+          if items.isEmpty {
+            self.messageLabel.text = "No characters were found 🤷‍♂️"
+            self.messageLabel.isHidden = false
+          } else {
+            self.messageLabel.isHidden = true
+            self.collectionView.reloadData()
+          }
+        case .loading:
+          self.messageLabel.isHidden = true
+          self.activityIndicator.startAnimating()
+        case .error:
+          self.activityIndicator.stopAnimating()
+          self.messageLabel.text = "Oops! Something went wrong 😩"
+          self.messageLabel.isHidden = false
         }
-      case .loading:
-        messageLabel.isHidden = true
-        activityIndicator.startAnimating()
-      case .error:
-        activityIndicator.stopAnimating()
-        messageLabel.text = "Oops! Something went wrong 😩"
-        messageLabel.isHidden = false
       }
     }
   }
@@ -84,11 +87,19 @@ class ComicViewController: UIViewController {
 
     state = .loading
 
+    do {
+      library = try ComicsLibrary(ApiDataReader(), storage: FileSystemDataWriter())
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+
     setupCollectionView()
     setupActivityIndicator()
     setupMessageLabel()
 
-    getCharacters(of: comic)
+    async {
+      await getCharacters(of: comic)
+    }
   }
 
   private func setupCollectionView() {
@@ -124,22 +135,14 @@ class ComicViewController: UIViewController {
     }
   }
 
-  private func getCharacters(of comic: Comic) {
+  private func getCharacters(of comic: Comic) async {
     state = .loading
 
-    provider.request(.getCharacters(comic: comic)) { [weak self] result in
-      guard let self = self else { return }
-
-      switch result {
-      case .success(let response):
-        do {
-          self.state = .ready(try response.map(MarvelResponse<Character>.self).data.results)
-        } catch {
-          self.state = .error
-        }
-      case .failure:
-        self.state = .error
-      }
+    do {
+      let characters = try await library.getCharacters(of: comic)
+      state = .ready(characters)
+    } catch {
+      state = .error
     }
   }
 }

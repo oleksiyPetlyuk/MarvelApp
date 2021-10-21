@@ -6,36 +6,39 @@
 //
 
 import UIKit
-import Moya
 
 class ComicsViewController: UIViewController {
-  let provider = MoyaProvider<Marvel>()
+  var library: ComicsLibrary!
 
   // MARK: - View State
   private var state: State = .loading {
     didSet {
-      switch state {
-      case .ready(let items):
-        activityIndicatorView.isHidden = true
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
 
-        if items.isEmpty {
-          comicsTable.isHidden = true
-          messageView.isHidden = false
-          messageLabel.text = "Nothing was found 😩"
-        } else {
-          messageView.isHidden = true
-          comicsTable.isHidden = false
-          comicsTable.reloadData()
+        switch self.state {
+        case .ready(let items):
+          self.activityIndicatorView.isHidden = true
+
+          if items.isEmpty {
+            self.comicsTable.isHidden = true
+            self.messageView.isHidden = false
+            self.messageLabel.text = "Nothing was found 😩"
+          } else {
+            self.messageView.isHidden = true
+            self.comicsTable.isHidden = false
+            self.comicsTable.reloadData()
+          }
+        case .loading:
+          self.activityIndicatorView.isHidden = false
+          self.comicsTable.isHidden = true
+          self.messageView.isHidden = true
+        case .error:
+          self.activityIndicatorView.isHidden = true
+          self.comicsTable.isHidden = true
+          self.messageView.isHidden = false
+          self.messageLabel.text = "Oops! Something went wrong 😩"
         }
-      case .loading:
-        activityIndicatorView.isHidden = false
-        comicsTable.isHidden = true
-        messageView.isHidden = true
-      case .error:
-        activityIndicatorView.isHidden = true
-        comicsTable.isHidden = true
-        messageView.isHidden = false
-        messageLabel.text = "Oops! Something went wrong 😩"
       }
     }
   }
@@ -53,9 +56,17 @@ class ComicsViewController: UIViewController {
 
     state = .loading
 
+    do {
+      library = try ComicsLibrary(ApiDataReader(), storage: FileSystemDataWriter())
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+
     setupSearchController()
 
-    getNewlyReleasedComics()
+    async {
+      await getNewlyReleasedComics()
+    }
   }
 
   private func setupSearchController() {
@@ -70,36 +81,25 @@ class ComicsViewController: UIViewController {
     definesPresentationContext = true
   }
 
-  private func getNewlyReleasedComics() {
+  private func getNewlyReleasedComics() async {
     state = .loading
 
-    provider.request(.newlyReleasedComics) { [weak self] result in
-      guard let self = self else { return }
-
-      self.handle(result: result)
+    do {
+      let comics = try await library.getNewlyReleasedComics()
+      state = .ready(comics)
+    } catch {
+      state = .error
     }
   }
 
-  private func getComicsWith(title: String) {
+  private func getComicsWith(title: String) async {
     state = .loading
 
-    provider.request(.findComics(title: title)) { [weak self] result in
-      guard let self = self else { return }
-
-      self.handle(result: result)
-    }
-  }
-
-  private func handle(result: Result<Response, MoyaError>) {
-    switch result {
-    case .success(let response):
-      do {
-        self.state = .ready(try response.map(MarvelResponse<Comic>.self).data.results)
-      } catch {
-        self.state = .error
-      }
-    case .failure:
-      self.state = .error
+    do {
+      let comics = try await library.findComics(startsWith: title)
+      state = .ready(comics)
+    } catch {
+      state = .error
     }
   }
 }
@@ -161,10 +161,14 @@ extension ComicsViewController: UISearchBarDelegate {
 
     let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
-    getComicsWith(title: searchText)
+    async {
+      await getComicsWith(title: searchText)
+    }
   }
 
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    getNewlyReleasedComics()
+    async {
+      await getNewlyReleasedComics()
+    }
   }
 }
