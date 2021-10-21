@@ -8,6 +8,7 @@
 import UIKit
 
 class ComicsViewController: UIViewController {
+  // swiftlint:disable:next implicitly_unwrapped_optional
   var library: ComicsLibrary!
 
   // MARK: - View State
@@ -64,7 +65,7 @@ class ComicsViewController: UIViewController {
 
     setupSearchController()
 
-    async {
+    Task {
       await getNewlyReleasedComics()
     }
   }
@@ -161,13 +162,13 @@ extension ComicsViewController: UISearchBarDelegate {
 
     let searchText = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
-    async {
+    Task {
       await getComicsWith(title: searchText)
     }
   }
 
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    async {
+    Task {
       await getNewlyReleasedComics()
     }
   }

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class ComicViewController: UIViewController {
+  // swiftlint:disable:next implicitly_unwrapped_optional
   var library: ComicsLibrary!
 
   // MARK: - View State
@@ -97,7 +98,7 @@ class ComicViewController: UIViewController {
     setupActivityIndicator()
     setupMessageLabel()
 
-    async {
+    Task {
       await getCharacters(of: comic)
     }
   }
