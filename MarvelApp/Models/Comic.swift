@@ -14,6 +14,15 @@ struct Comic: Codable {
   let thumbnail: Thumbnail
   let characters: CharactersInfo
   private let dates: [Date]
+
+  init(id: Int, title: String, description: String? = nil, thumbnail: Thumbnail, characters: [Character]) {
+    self.id = id
+    self.title = title
+    self.description = description
+    self.thumbnail = thumbnail
+    self.characters = CharactersInfo(available: characters.count, items: characters)
+    self.dates = []
+  }
 }
 
 extension Comic {

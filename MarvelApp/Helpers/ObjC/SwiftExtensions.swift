@@ -7,4 +7,4 @@
 
 import Foundation
 
-extension MLogger.LogLevel: CustomStringConvertible {}
+//extension MLogger.LogLevel: CustomStringConvertible {}
