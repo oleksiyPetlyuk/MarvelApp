@@ -9,14 +9,14 @@ import XCTest
 @testable import MarvelApp
 
 class ComicsLibraryTests: XCTestCase {
-  func test_InitSuccess() {
+  func test_initSuccess() {
     let dummyReader = DummyDataReader()
     let storage = FileSystemDataWriter()
 
     XCTAssertNoThrow(try ComicsLibrary(dummyReader, storage: storage))
   }
 
-  func test_InitFail() {
+  func test_initFail() {
     let stubReader = StubDataReader()
     let storage = FileSystemDataWriter()
 
@@ -25,33 +25,39 @@ class ComicsLibraryTests: XCTestCase {
     XCTAssertNil(library)
   }
 
-  func test_AddRemoveItems() throws {
+  func test_addRemoveItems() throws {
     let fakeReader = FakeDataReader()
+    var expectedComicsCount = fakeReader.favoritesComicsCount
     let storage = FileSystemDataWriter()
     let library = try ComicsLibrary(fakeReader, storage: storage)
 
-    XCTAssertEqual(library.items.count, 10)
+    XCTAssertEqual(library.items.count, expectedComicsCount)
 
     library.add([
       Comic(id: 1, title: "Spider-Man", thumbnail: Thumbnail(path: "image", extension: "jpg"), characters: []),
       Comic(id: 2, title: "Hulk", thumbnail: Thumbnail(path: "image", extension: "jpg"), characters: [])
     ])
 
-    XCTAssertEqual(library.items.count, 12)
+    expectedComicsCount += 2
+
+    XCTAssertEqual(library.items.count, expectedComicsCount)
 
     library.remove(whereId: 1)
 
-    XCTAssertEqual(library.items.count, 11)
+    expectedComicsCount -= 1
+
+    XCTAssertEqual(library.items.count, expectedComicsCount)
 
     library.items.forEach { library.remove(whereId: $0.id) }
 
     XCTAssertEqual(library.items.count, 0)
   }
 
-  func test_RestoresFromDisk() throws {
+  func test_restoresFromDisk() throws {
     let dummyReader = DummyDataReader()
     let storage = FileSystemDataWriter()
-    var library = try ComicsLibrary(dummyReader, storage: storage)
+    let queue = DispatchQueue(label: "ComicsLibraryTests")
+    var library = try ComicsLibrary(dummyReader, storage: storage, queue: queue)
 
     XCTAssertEqual(library.items.count, 0)
 
@@ -60,8 +66,8 @@ class ComicsLibraryTests: XCTestCase {
       Comic(id: 2, title: "Hulk", thumbnail: Thumbnail(path: "image", extension: "jpg"), characters: [])
     ])
 
-    // sleep to make sure async write task is completed
-    sleep(5)
+    // Issue an empty closure on the queue and wait for it to be executed
+    queue.sync {}
 
     let dataReader = ApiDataReader()
     library = try ComicsLibrary(dataReader, storage: storage)

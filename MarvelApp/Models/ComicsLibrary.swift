@@ -16,16 +16,19 @@ class ComicsLibrary {
 
   private let dataStorage: DataWriter
 
+  private let queue: DispatchQueue
+
   private(set) var items: [Comic] {
     didSet {
       save()
     }
   }
 
-  init(_ dataProvider: DataReader, storage: DataWriter) throws {
+  init(_ dataProvider: DataReader, storage: DataWriter, queue: DispatchQueue = .global()) throws {
     self.dataProvider = dataProvider
     self.dataStorage = storage
     self.items = try dataProvider.getFavoritesComics()
+    self.queue = queue
   }
 
   func getNewlyReleasedComics() async throws -> [Comic] {
@@ -52,7 +55,7 @@ class ComicsLibrary {
 // MARK: - private
 private extension ComicsLibrary {
   func save() {
-    DispatchQueue.global().async { [weak self] in
+    queue.async { [weak self] in
       guard let self = self else { return }
 
       let encoder = JSONEncoder()

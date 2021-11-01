@@ -7,4 +7,5 @@
 
 import Foundation
 
+// TODO: Fix this extension to not crash the build process
 // extension MLogger.LogLevel: CustomStringConvertible {}

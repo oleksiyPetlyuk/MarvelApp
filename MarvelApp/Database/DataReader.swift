@@ -104,6 +104,14 @@ class DummyDataReader: DataReader {
 
 // swiftlint:disable force_unwrapping force_try
 class FakeDataReader: DataReader {
+  var favoritesComicsCount: Int {
+    do {
+      return try getFavoritesComics().count
+    } catch {
+      fatalError(error.localizedDescription)
+    }
+  }
+
   func getFavoritesComics() throws -> [Comic] {
     let filePath = Bundle.main.path(forResource: "comics_samples", ofType: "json")
     let data = FileManager.default.contents(atPath: filePath!)
